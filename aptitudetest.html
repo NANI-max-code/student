@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Aptitude Test</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #d8c9ae;
+			}
+			.container {
+				width: 60%;
+				margin: 30px auto;
+				padding: 20px;
+				background-color: white;
+				border-radius: 10px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			}
+			.btn {
+				background-color: #a18a4f;
+				color: white;
+				padding: 10px 20px;
+				border-radius: 5px;
+				text-decoration: none;
+				font-size: 16px;
+				transition: 0.3s;
+			}
+			.btn:hover {
+				background-color: #575757;
+			}
+			footer {
+				text-align: center;
+				padding: 20px;
+				background-color: #333;
+				color: white;
+				position: fixed;
+				width: 100%;
+				bottom: 0;
+			}
+			.navbar {
+				background-color: #333;
+				padding: 10px 20px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				border-radius: 10px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			}
+			.navbar a {
+				color: white;
+				text-decoration: none;
+				padding: 10px 15px;
+				border-radius: 4px;
+				font-weight: bold;
+				transition: background-color 0.3s;
+			}
+			.navbar a:hover {
+				background-color: #575757;
+			}
+			.dropdown {
+				position: relative;
+				display: inline-block;
+			}
+			.dropdown-menu {
+				display: none;
+				position: absolute;
+				background-color: white;
+				min-width: 200px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				border-radius: 5px;
+				z-index: 1;
+			}
+			.dropdown-menu a {
+				color: black;
+				padding: 12px 16px;
+				display: block;
+				text-decoration: none;
+				transition: background 0.3s;
+			}
+			.dropdown-menu a:hover {
+				background-color: #f1f1f1;
+			}
+			.dropdown:hover .dropdown-menu {
+				display: block;
+			}
+			.user-dropdown {
+				position: relative;
+				display: inline-block;
+			}
+			.user-dropdown-menu {
+				display: none;
+				position: absolute;
+				right: 0;
+				background-color: white;
+				min-width: 150px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				border-radius: 5px;
+				z-index: 1;
+			}
+			.user-dropdown-menu a {
+				color: black;
+				padding: 10px 15px;
+				display: block;
+				text-decoration: none;
+			}
+			.user-dropdown-menu a:hover {
+				background-color: #f1f1f1;
+			}
+			.user-dropdown:hover .user-dropdown-menu {
+				display: block;
+			}
+		</style>
+		<script>
+			function calculateAptitudeScore(event) {
+    event.preventDefault();
+
+    let score = 0;
+    let answers = {
+        q1: "c",
+        q2: "a",
+        q3: "c",
+        q4: "b",
+        q5: "b"
+    };
+
+    let totalQuestions = Object.keys(answers).length;
+
+    for (let key in answers) {
+        let selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === answers[key]) {
+            score++;
+        }
+    }
+
+    let percentage = (score / totalQuestions) * 100;
+
+    // Save to localStorage
+    localStorage.setItem("aptitudeScore", score);
+    localStorage.setItem("aptitudePercentage", percentage.toFixed(2));
+    localStorage.setItem("testType", "aptitude");
+
+    window.location.href = "results.html";  // Redirect to results page
+}
+
+		</script>
+	</head>
+	<body>
+
+
+		<div class="navbar">
+			<a href="userhome.html">Home</a>
+
+			<div class="dropdown">
+				<a href="javascript:void(0);">Tests ▼</a>
+				<div class="dropdown-menu">
+					<a href="aptitudetest.html">Aptitude Test</a>
+					<a href="personalitytest.html">Personality Test</a>
+				</div>
+			</div>
+
+			<div class="user-dropdown">
+				<a href="javascript:void(0);">User ▼</a>
+				<div class="user-dropdown-menu">
+					<a href="editprofile.html">Edit Profile</a>
+					<a href="login.html">Logout</a>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container">
+			<h2>Aptitude Test</h2>
+			<form onsubmit="calculateAptitudeScore(event)">
+				<p>
+					<strong>1. If a train travels 60 km in 1 hour, how long will it take to travel 300 km?</strong>
+				</p>
+				<input type="radio" name="q1" value="a">
+				3 hours<br>
+				<input type="radio" name="q1" value="b">
+				4 hours<br>
+				<input type="radio" name="q1" value="c">
+				5 hours<br>
+				<input type="radio" name="q1" value="d">
+				6 hours<br>
+
+				<p>
+					<strong>2. What is the next number in the series? 2, 6, 12, 20, 30,?</strong>
+				</p>
+				<input type="radio" name="q2" value="a">
+				42<br>
+				<input type="radio" name="q2" value="b">
+				36<br>
+				<input type="radio" name="q2" value="c">
+				40<br>
+				<input type="radio" name="q2" value="d">
+				48<br>
+
+				<p>
+					<strong>3. What does HTML stand for?</strong>
+				</p>
+				<input type="radio" name="q3" value="a">
+				Hyper Transfer Markup Language<br>
+				<input type="radio" name="q3" value="b">
+				Hyperlink and Text Markup Language<br>
+				<input type="radio" name="q3" value="c">
+				HyperText Markup Language<br>
+				<input type="radio" name="q3" value="d">
+				HyperText Makeup Language<br>
+
+				<p>
+					<strong>4. What is the output of the following Python code? print(2*(3+4))</strong>
+				</p>
+				<input type="radio" name="q4" value="a">
+				10<br>
+				<input type="radio" name="q4" value="b">
+				14<br>
+				<input type="radio" name="q4" value="c">
+				16<br>
+				<input type="radio" name="q4" value="d">
+				04<br>
+
+				<p>
+					<strong>5. Which data structure uses LIFO (Last In, First Out)?</strong>
+				</p>
+				<input type="radio" name="q5" value="a">
+				Queue<br>
+				<input type="radio" name="q5" value="b">
+				Stack<br>
+				<input type="radio" name="q5" value="c">
+				Linked List<br>
+				<input type="radio" name="q5" value="d">
+				Hash Table<br>
+
+				<button title="Are you sure?" type="submit" class="btn mt-3">Submit Test</button>
+			</form>
+		</div>
+
+		<footer>
+			&copy; 2025 Online Test System. All rights reserved.
+		</footer>
+
+	</body>
+</html>
